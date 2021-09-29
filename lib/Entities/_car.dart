@@ -1,11 +1,9 @@
-import 'dart:ffi';
-
-import 'brand.dart';
+import '_brand.dart';
 
 class Car {
   final String name;
-  final Double price;
-  final Bard brand;
+  final double price;
+  final Brand brand;
 
   Car({required this.name, required this.price, required this.brand});
 }
