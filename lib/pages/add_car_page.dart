@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:cars/api/brands_api.dart';
 import 'package:cars/models/_brand.dart';
 import 'package:cars/models/_car.dart';
 import 'package:flutter/cupertino.dart';
@@ -16,10 +17,15 @@ class AddCar extends StatefulWidget {
 class _AddCarState extends State<AddCar> {
   var nomeTextController = TextEditingController();
   var priceTextController = TextEditingController();
+  var brandName = "";
+
+  var brandsApi = new BrandsAPI();
+  late Future<List<Brand>> brands;
 
   @override
   void initState() {
     super.initState();
+    brands = brandsApi.fetchBrands();
   }
 
   @override
@@ -40,11 +46,29 @@ class _AddCarState extends State<AddCar> {
   Column getBody() {
     return Column(
       children: <Widget>[
-        ListTile(
-          title: TextField(
-            decoration: InputDecoration(
-              hintText: "Marca",
-            ),
+        Container(
+          child: FutureBuilder<List<Brand>>(
+            future: brands,
+            builder: (context, snapshot) {
+              if (!snapshot.hasData) {
+                return CircularProgressIndicator();
+              } else {
+                return ListTile(
+                  title: DropdownButtonFormField<String>(
+                    hint: Text('Marca'),
+                    items: snapshot.data!.map((Brand brand) {
+                      return DropdownMenuItem<String>(
+                        value: brand.nome,
+                        child: Text(brand.nome),
+                      );
+                    }).toList(),
+                    onChanged: (brand) {
+                      brandName = brand!;
+                    },
+                  ),
+                );
+              }
+            },
           ),
         ),
         ListTile(
@@ -65,10 +89,12 @@ class _AddCarState extends State<AddCar> {
         ),
         ElevatedButton(
           onPressed: () {
+            Brand brand = Brand(nome: brandName, codigo: "123");
+
             String name = nomeTextController.text;
             double price = double.parse(priceTextController.text);
-            Brand brand = Brand(nome: "test 1", codigo: "123");
             Car car = Car(name: name, price: price, brand: brand);
+
             widget.onAddCar(car);
             Navigator.pop(context);
           },
