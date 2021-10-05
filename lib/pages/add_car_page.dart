@@ -1,26 +1,25 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:cars/models/_brand.dart';
+import 'package:cars/models/_car.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class AddCar extends StatefulWidget {
-  const AddCar({Key? key}) : super(key: key);
+  const AddCar({Key? key, required this.onAddCar}) : super(key: key);
+  final Function(Car) onAddCar;
 
   @override
   _AddCarState createState() => _AddCarState();
 }
 
 class _AddCarState extends State<AddCar> {
-  // final _controller = new TextEditingController();
-
-  var count = 1;
-  num totalCost = 0;
+  var nomeTextController = TextEditingController();
+  var priceTextController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
-    // totalCost = 0;
-    // _controller.text = "1";
   }
 
   @override
@@ -53,6 +52,7 @@ class _AddCarState extends State<AddCar> {
             decoration: InputDecoration(
               hintText: "Nome",
             ),
+            controller: nomeTextController,
           ),
         ),
         ListTile(
@@ -60,10 +60,18 @@ class _AddCarState extends State<AddCar> {
             decoration: InputDecoration(
               hintText: "Preço",
             ),
+            controller: priceTextController,
           ),
         ),
         ElevatedButton(
-          onPressed: () {},
+          onPressed: () {
+            String name = nomeTextController.text;
+            double price = double.parse(priceTextController.text);
+            Brand brand = Brand(nome: "test 1", codigo: "123");
+            Car car = Car(name: name, price: price, brand: brand);
+            widget.onAddCar(car);
+            Navigator.pop(context);
+          },
           child: Text("Salvar"),
         )
       ],

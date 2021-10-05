@@ -1,4 +1,4 @@
-import 'package:cars/models/_Car.dart';
+import 'package:cars/models/_car.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

@@ -1,4 +1,4 @@
-import 'package:cars/models/_Car.dart';
+import 'package:cars/models/_car.dart';
 import 'package:cars/models/_brand.dart';
 import 'package:cars/widgets/car_widget.dart';
 import 'package:flutter/cupertino.dart';
@@ -54,7 +54,12 @@ class _CarsPageState extends State<CarsPage> {
           Navigator.of(context).push(
             MaterialPageRoute(
               builder: (context) {
-                return const AddCar();
+                return AddCar(
+                  onAddCar: (newCar) {
+                    cars.add(newCar);
+                    setState(() {});
+                  },
+                );
               },
             ),
           );
