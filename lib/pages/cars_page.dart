@@ -15,13 +15,8 @@ class CarsPage extends StatefulWidget {
 
 class _CarsPageState extends State<CarsPage> {
   static final cars = [
-    Car(name: "nome 1", price: 100.0, brand: Brand(nome: "BMW", codigo: "1")),
-    Car(
-        name: "nome 2",
-        price: 120.0,
-        brand: Brand(nome: "Citroën", codigo: "1")),
-    Car(name: "nome 1", price: 100.0, brand: Brand(nome: "BMW", codigo: "1")),
-    Car(name: "nome 1", price: 100.0, brand: Brand(nome: "BMW", codigo: "1"))
+    Car(name: "X5", price: 90000.0, brand: Brand(nome: "BMW", codigo: "1")),
+    Car(name: "X7", price: 100000.0, brand: Brand(nome: "BMW", codigo: "2"))
   ];
 
   @override
@@ -64,7 +59,7 @@ class _CarsPageState extends State<CarsPage> {
             ),
           );
         },
-        backgroundColor: Colors.green,
+        backgroundColor: Colors.blue,
         child: const Icon(Icons.add),
       ),
     );
