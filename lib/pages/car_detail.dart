@@ -36,8 +36,9 @@ class CarDetail extends StatelessWidget {
               Align(
                 alignment: Alignment.bottomCenter,
                 child: Image.asset(
-                  "assets/images/car.png",
-                  height: 96,
+                  "assets/images/sports_car.png",
+                  height: 200,
+                  width: 200,
                 ),
               ),
             ],
