@@ -6,13 +6,13 @@ import 'package:flutter/material.dart';
 class CarDetail extends StatelessWidget {
   final Car car;
   final brandsApi = ImagesAPI();
-  late Future<String> imageURL;
+  late final Future<String> imageURL;
 
   CarDetail({Key? key, required this.car}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    imageURL = brandsApi.fetchImageURL(car.name);
+    imageURL = brandsApi.fetchImageURL("${car.brand.nome} ${car.name}");
 
     return Scaffold(
       appBar: AppBar(
@@ -48,13 +48,16 @@ class CarDetail extends StatelessWidget {
                         return Image.network(
                           (snapshot.data).toString(),
                           fit: BoxFit.cover,
-                          height: 200,
-                          width: 200,
+                          height: 300,
+                          width: 300,
                         );
                       }
                     }),
               ),
             ],
+          ),
+          const SizedBox(
+            height: 15,
           ),
           Center(
             child: Column(
